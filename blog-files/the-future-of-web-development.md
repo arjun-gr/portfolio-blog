@@ -8,7 +8,7 @@ tags: ["Web Dev", "Future Tech"]
 pinned: false
 featuredImage: "/placeholder.svg?height=400&width=800&text=Future+Web+Dev"
 author:
-  name: "Arjun Patel"
+  name: "Arjun Gr"
   image: "/placeholder.svg?height=100&width=100"
   bio: "Software Engineer & Tech Blogger specializing in web development, AI, and cloud technologies."
 ---

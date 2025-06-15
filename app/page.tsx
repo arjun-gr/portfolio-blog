@@ -42,7 +42,7 @@ export default async function Home() {
           <div className="w-full md:w-1/2 flex justify-center md:justify-end order-1 md:order-2">
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20 shadow-xl transition-transform hover:scale-105 duration-300">
               <Image
-                src="/placeholder.svg?height=320&width=320"
+                src="/me.png?height=320&width=320"
                 alt="Arjun Gahatraj"
                 width={320}
                 height={320}

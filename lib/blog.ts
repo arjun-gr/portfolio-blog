@@ -263,7 +263,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         pinned: matterResult.data.pinned || false,
         featuredImage: matterResult.data.featuredImage || "/placeholder.svg?height=400&width=800",
         author: matterResult.data.author || {
-          name: "Arjun Patel",
+          name: "Arjun Gr",
           image: "/placeholder.svg?height=100&width=100",
           bio: "Software Engineer & Tech Blogger",
         },
@@ -313,7 +313,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
       pinned: matterResult.data.pinned || false,
       featuredImage: matterResult.data.featuredImage || "/placeholder.svg?height=400&width=800",
       author: matterResult.data.author || {
-        name: "Arjun Patel",
+        name: "Arjun Gr",
         image: "/placeholder.svg?height=100&width=100",
         bio: "Software Engineer & Tech Blogger",
       },

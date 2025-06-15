@@ -8,7 +8,7 @@ tags: ["React", "Performance"]
 pinned: false
 featuredImage: "/placeholder.svg?height=400&width=800&text=React+Performance"
 author:
-  name: "Arjun Patel"
+  name: "Arjun Gr"
   image: "/placeholder.svg?height=100&width=100"
   bio: "Software Engineer & Tech Blogger"
 ---
