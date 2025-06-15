@@ -1,0 +1,397 @@
+---
+title: "Getting Started with TypeScript"
+slug: "getting-started-with-typescript"
+description: "A beginner's guide to TypeScript and static typing."
+date: "September 5, 2023"
+readTime: "7 min read"
+tags: ["TypeScript", "Beginners"]
+pinned: false
+featuredImage: "/placeholder.svg?height=400&width=800&text=TypeScript+Guide"
+author:
+  name: "Arjun Patel"
+  image: "/placeholder.svg?height=100&width=100"
+  bio: "Software Engineer & Tech Blogger"
+---
+
+## Introduction to TypeScript
+
+TypeScript is a superset of JavaScript that adds static types to the language. Developed by Microsoft, it has become increasingly popular in the web development community for its ability to catch errors at compile time and improve code maintainability.
+
+In this guide, we'll explore the basics of TypeScript and how to get started with it in your projects.
+
+## Why TypeScript?
+
+### Better Error Detection
+
+TypeScript catches errors at compile time rather than runtime:
+
+```typescript
+// JavaScript - error only discovered at runtime
+function greet(name) {
+  return "Hello, " + name.toUpperCase();
+}
+
+greet(null); // Runtime error: Cannot read property 'toUpperCase' of null
+
+// TypeScript - error caught at compile time
+function greet(name: string): string {
+  return "Hello, " + name.toUpperCase();
+}
+
+greet(null); // Compile error: Argument of type 'null' is not assignable to parameter of type 'string'
+```
+
+### Enhanced IDE Support
+
+TypeScript provides excellent IntelliSense, auto-completion, and refactoring capabilities.
+
+### Better Documentation
+
+Types serve as documentation for your code:
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  isActive: boolean;
+}
+
+function updateUser(user: User): Promise<User> {
+  // Implementation
+}
+```
+
+## Basic Types
+
+### Primitive Types
+
+```typescript
+let isDone: boolean = false;
+let decimal: number = 6;
+let color: string = "blue";
+let list: number[] = [1, 2, 3];
+let tuple: [string, number] = ["hello", 10];
+```
+
+### Object Types
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+  email?: string; // Optional property
+}
+
+const person: Person = {
+  name: "John Doe",
+  age: 30
+};
+```
+
+### Union Types
+
+```typescript
+type Status = "loading" | "success" | "error";
+let currentStatus: Status = "loading";
+
+function handleResponse(response: string | number) {
+  if (typeof response === "string") {
+    console.log(response.toUpperCase());
+  } else {
+    console.log(response.toFixed(2));
+  }
+}
+```
+
+## Functions
+
+### Function Types
+
+```typescript
+// Function declaration
+function add(x: number, y: number): number {
+  return x + y;
+}
+
+// Arrow function
+const multiply = (x: number, y: number): number => x * y;
+
+// Function type
+type MathOperation = (x: number, y: number) => number;
+
+const divide: MathOperation = (x, y) => x / y;
+```
+
+### Optional and Default Parameters
+
+```typescript
+function buildName(firstName: string, lastName?: string): string {
+  if (lastName) {
+    return firstName + " " + lastName;
+  }
+  return firstName;
+}
+
+function greetUser(name: string, greeting: string = "Hello"): string {
+  return `${greeting}, ${name}!`;
+}
+```
+
+## Classes
+
+```typescript
+class Animal {
+  private name: string;
+  protected species: string;
+  public age: number;
+
+  constructor(name: string, species: string, age: number) {
+    this.name = name;
+    this.species = species;
+    this.age = age;
+  }
+
+  public makeSound(): void {
+    console.log("Some generic animal sound");
+  }
+
+  protected getName(): string {
+    return this.name;
+  }
+}
+
+class Dog extends Animal {
+  constructor(name: string, age: number) {
+    super(name, "Canine", age);
+  }
+
+  public makeSound(): void {
+    console.log("Woof!");
+  }
+
+  public introduce(): string {
+    return `I'm ${this.getName()}, a ${this.species}`;
+  }
+}
+```
+
+## Generics
+
+Generics allow you to create reusable components:
+
+```typescript
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let output1 = identity<string>("myString");
+let output2 = identity<number>(100);
+
+// Generic interfaces
+interface GenericIdentityFn<T> {
+  (arg: T): T;
+}
+
+// Generic classes
+class GenericNumber<T> {
+  zeroValue: T;
+  add: (x: T, y: T) => T;
+}
+
+let myGenericNumber = new GenericNumber<number>();
+myGenericNumber.zeroValue = 0;
+myGenericNumber.add = function(x, y) { return x + y; };
+```
+
+## Advanced Types
+
+### Mapped Types
+
+```typescript
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+
+type Partial<T> = {
+  [P in keyof T]?: T[P];
+};
+
+interface User {
+  name: string;
+  age: number;
+  email: string;
+}
+
+type ReadonlyUser = Readonly<User>;
+type PartialUser = Partial<User>;
+```
+
+### Conditional Types
+
+```typescript
+type NonNullable<T> = T extends null | undefined ? never : T;
+
+type Example1 = NonNullable<string | null>; // string
+type Example2 = NonNullable<number | undefined>; // number
+```
+
+## Setting Up TypeScript
+
+### Installation
+
+```bash
+# Global installation
+npm install -g typescript
+
+# Project-specific installation
+npm install --save-dev typescript
+npm install --save-dev @types/node
+```
+
+### Configuration
+
+Create a `tsconfig.json` file:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020", "DOM"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+### Build Scripts
+
+Add to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  }
+}
+```
+
+## Best Practices
+
+### 1. Use Strict Mode
+
+Enable strict mode in your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true
+  }
+}
+```
+
+### 2. Prefer Interfaces Over Types
+
+```typescript
+// Preferred
+interface User {
+  name: string;
+  age: number;
+}
+
+// Less preferred for object shapes
+type User = {
+  name: string;
+  age: number;
+};
+```
+
+### 3. Use Utility Types
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+}
+
+// Create a type without sensitive fields
+type PublicUser = Omit<User, 'password'>;
+
+// Create a type with only specific fields
+type UserSummary = Pick<User, 'id' | 'name'>;
+```
+
+### 4. Avoid `any`
+
+```typescript
+// Bad
+function processData(data: any): any {
+  return data.someProperty;
+}
+
+// Good
+interface DataType {
+  someProperty: string;
+}
+
+function processData(data: DataType): string {
+  return data.someProperty;
+}
+```
+
+## Common Pitfalls
+
+### 1. Type Assertions
+
+Use type assertions sparingly:
+
+```typescript
+// Risky
+const userInput = document.getElementById('user-input') as HTMLInputElement;
+
+// Safer
+const userInput = document.getElementById('user-input');
+if (userInput instanceof HTMLInputElement) {
+  // Now TypeScript knows userInput is HTMLInputElement
+  console.log(userInput.value);
+}
+```
+
+### 2. Implicit Any
+
+Avoid implicit any by enabling `noImplicitAny`:
+
+```typescript
+// This will cause an error with noImplicitAny
+function processItems(items) { // Parameter 'items' implicitly has an 'any' type
+  return items.map(item => item.name);
+}
+
+// Fix by adding types
+function processItems(items: Array<{name: string}>) {
+  return items.map(item => item.name);
+}
+```
+
+## Conclusion
+
+TypeScript is a powerful tool that can significantly improve your JavaScript development experience. By adding static types, you get better error detection, enhanced IDE support, and more maintainable code.
+
+Start small by adding TypeScript to a single file or component, then gradually expand its usage throughout your project. The initial learning curve is worth the long-term benefits of more robust and maintainable code.
+
+Remember that TypeScript is designed to be adopted incrementally, so you don't need to convert your entire codebase at once. Begin with the basics covered in this guide, and gradually explore more advanced features as you become comfortable with the language.
